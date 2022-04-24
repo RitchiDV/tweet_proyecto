@@ -11,4 +11,4 @@ app=FastAPI()
    tags=["home"]
     )
 def home():
-    return{"hello:world"}
+    return{"hello":"world"}
