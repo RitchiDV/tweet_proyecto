@@ -1,5 +1,4 @@
 #python..
-from turtle import update
 from uuid import UUID
 from datetime import date
 from typing import Optional
@@ -40,6 +39,7 @@ class user(userBase):
         )
     burth_date:Optional[date] = Field(default=None)
 
+
 class tweet(BaseModel):
     tweet_id: UUID
     content: str = Field(
@@ -51,7 +51,7 @@ class tweet(BaseModel):
     update_at:Optional[datetime] =Field(default=None)
     by: user = Field(...)
 
-
+#path operations
 @app.get(
    path= "/",
    status_code=status.HTTP_200_OK,
@@ -59,3 +59,53 @@ class tweet(BaseModel):
     )
 def home():
     return{"hello":"world"}
+##users
+@app.post(
+    path="/signup",
+    response_model=user,
+    status_code=status.HTTP_201_CREATED,
+    summary="registrer a user",
+    tags=["Users"]
+)
+def signup ():
+    pass
+
+@app.post(
+    path="/signup",
+    response_model=user,
+    status_code=status.HTTP_201_CREATED,
+    summary="registrer a user",
+    tags=["Users"]
+)
+def signup ():
+    pass
+
+@app.post(
+    path="/signup",
+    response_model=user,
+    status_code=status.HTTP_201_CREATED,
+    summary="registrer a user",
+    tags=["Users"]
+)
+def signup ():
+    pass
+
+@app.post(
+    path="/signup",
+    response_model=user,
+    status_code=status.HTTP_201_CREATED,
+    summary="registrer a user",
+    tags=["Users"]
+)
+def signup ():
+    pass
+
+@app.post(
+    path="/signup",
+    response_model=user,
+    status_code=status.HTTP_201_CREATED,
+    summary="registrer a user",
+    tags=["Users"]
+)
+def signup ():
+    pass
