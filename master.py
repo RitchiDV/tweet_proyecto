@@ -1,7 +1,9 @@
 #python
+from turtle import update
 from uuid import UUID
 from datetime import date
 from typing import Optional
+from datetime import datetime
 #pydantic
 from pydantic import BaseModel
 from pydantic import EmailStr
@@ -20,13 +22,12 @@ class userBase(BaseModel):
 
 class userLogin(userBase):   
     password: str = Field(...,
-    min_length=8
+    min_length=8,
+    max_length=20
     )
     
-    
+
 class user(userBase):
-    
-    
     first_name: str = Field(
         ...,
         min_length=1,
@@ -40,7 +41,16 @@ class user(userBase):
     burth_date:Optional[date] = Field(default=None)
 
 class tweet(BaseModel):
-    pass
+    tweet_id: UUID
+    content: str = Field(
+        ...,
+        min_length=1,
+        max_length=256
+        )
+    created_at: datetime =Field(default=datetime.now())
+    update_at:Optional[datetime] =Field(default=None)
+    by: user = Field(...)
+
 
 @app.get(
    path= "/",
