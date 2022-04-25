@@ -1,7 +1,7 @@
 #python..
 from uuid import UUID
 from datetime import date
-from typing import Optional
+from typing import Optional,List
 from datetime import datetime
 #pydantic
 from pydantic import BaseModel
@@ -71,41 +71,51 @@ def signup ():
     pass
 
 @app.post(
-    path="/signup",
+    path="/login",
     response_model=user,
-    status_code=status.HTTP_201_CREATED,
-    summary="registrer a user",
+    status_code=status.HTTP_200_OK,
+    summary="Login a user",
     tags=["Users"]
 )
-def signup ():
+def login ():
     pass
 
-@app.post(
-    path="/signup",
-    response_model=user,
-    status_code=status.HTTP_201_CREATED,
-    summary="registrer a user",
+@app.get(
+    path="/users",
+    response_model=List[user],
+    status_code=status.HTTP_200_OK,
+    summary="show a users",
     tags=["Users"]
 )
-def signup ():
+def show_all_users():
     pass
 
-@app.post(
-    path="/signup",
+@app.get(
+    path="/users/{user_id}",
     response_model=user,
-    status_code=status.HTTP_201_CREATED,
-    summary="registrer a user",
+    status_code=status.HTTP_200_OK,
+    summary="show a spesific user information",
     tags=["Users"]
 )
-def signup ():
+def show_a_user ():
     pass
 
-@app.post(
-    path="/signup",
+@app.delete(
+    path="/user/{user_id}/delete",
     response_model=user,
-    status_code=status.HTTP_201_CREATED,
-    summary="registrer a user",
+    status_code=status.HTTP_200_OK,
+    summary="delete a user",
     tags=["Users"]
 )
-def signup ():
+def delete_a_user ():
+    pass
+
+@app.put(
+    path="/user/{user_id}/update",
+    response_model=user,
+    status_code=status.HTTP_200_OK,
+    summary="update a user",
+    tags=["Users"]
+)
+def update_a_user ():
     pass
