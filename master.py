@@ -55,7 +55,7 @@ class tweet(BaseModel):
         max_length=256
         )
     created_at: datetime =Field(default=datetime.now())
-    update_at:Optional[datetime] =Field(default=None)
+    updated_at:Optional[datetime] =Field(default=None)
     by: user = Field(...)
 
 #path operations
@@ -187,8 +187,39 @@ def home():
     summary="post a tweet",
     tags=["tweets"]
 )
-def post ():
-    pass
+def post (tweet:tweet = Body(...)):
+     """
+    post a tweet
+
+    this path operation popst a tweet in the app 
+
+    parameters:
+        - Request body parameter
+            -tweet: tweet
+
+    Return a json with the basic tweet information:
+        - tweet_id: UUID
+        - content: str 
+        - created_at: datetime 
+        - updated_at:Optional[datetime] 
+        - by: user 
+
+    """
+     with open("tweet.json", "r+", encoding="utf-8") as f:
+
+        results = json.loads(f.read())
+        tweet_dict =tweet.dict()
+        tweet_dict["tweet_id"]=str (tweet_dict["tweet_id"])
+        tweet_dict["created_at"]=str (tweet_dict["created_at"])
+        tweet_dict["updated_at"]=str (tweet_dict["updated_at"])
+        tweet_dict["by"]["user_id"]=str(tweet_dict["by"]["user_id"])
+        tweet_dict["by"]["birth_date"]=str(tweet_dict["by"]["birth_date"])
+        results.append(tweet_dict)
+        f.seek(0)
+        f.write(json.dumps(results))
+        return tweet
+
+
 ###show a tweet
 @app.get(
     path="/tweet/{tweet_id}",
