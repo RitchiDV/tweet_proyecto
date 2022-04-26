@@ -178,7 +178,21 @@ def update_a_user ():
    tags=["tweets"]
     )
 def home():
-    return{"hello":"world"}
+    """
+    this path operation shows all tweets in the app
+
+    parameters:
+        -
+    returns a json list whit all tweets in the app, with the following keys:
+        - tweet_id: UUID
+        - content: str 
+        - created_at: datetime 
+        - updated_at:Optional[datetime] 
+        - by: user 
+    """
+    with open ("tweet.json", "r", encoding="utf-8") as f:
+        results = json.loads(f.read())
+        return results
 ###post a tweet
 @app.post(
     path="/post",
